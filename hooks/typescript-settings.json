@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|MultiEdit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/Projects/project-context/hooks/tsc-check.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
