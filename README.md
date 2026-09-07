@@ -1,6 +1,6 @@
 # Claude Code Workflow Starter
 
-A clone-and-fill starter kit for running Claude Code the "control plane" way: a private
+A clone-and-fill starter kit for running Claude Code uaing the 'control plane': a private
 context repo that sits beside your projects and holds behavioural policy, per-project
 state, and reusable runbooks — so every session starts with the same rules and the same
 knowledge, instead of starting from zero.
