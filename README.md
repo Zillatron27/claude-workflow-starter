@@ -112,5 +112,6 @@ repos you can commit CLAUDE.md directly or still use the symlink for consistency
 | `commands/update-context.md` | `/update-context` — end-of-session state sync |
 | `hooks/` | Example PostToolUse typecheck hook (TypeScript) + settings profile |
 
-Everything is a starting point. Delete what doesn't fit and adjust as needed. 
+Everything here is a starting point. Delete what doesn't fit and adjust as needed. 
+
 Have a lot of fun :)
