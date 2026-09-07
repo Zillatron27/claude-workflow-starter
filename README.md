@@ -9,32 +9,32 @@ knowledge, instead of starting from zero.
 
 ## Why
 
-Claude Code is stateless. Every session starts fresh: no memory of previous work, no
-knowledge of your systems, no awareness of what phase a project is in. Left unmanaged
-it's a fast worker that guesses at context and makes confident mistakes — and makes the
-*same* mistakes repeatedly, because corrections don't persist between sessions.
+Claude Code is stateless. Every session starts fresh with no memory of previous work, no
+knowledge of your systems and no awareness of what phase a project is in. Left unmanaged
+it's a fast worker that guesses at context and makes confident mistakes and often makes the
+*same* mistakes repeatedly because corrections don't persist between sessions.
 
-These are infrastructure problems, and they have infrastructure solutions: policy files
-that load automatically, state files that survive between sessions, runbooks for
-repeatable procedures, and hooks that enforce checks mechanically. That layer between
-you and the executor is the control plane.
+These are infrastructure problems that can be helped (but not entirely solved) with infrastructure, not memory: policy files that load automatically, state files that survive between sessions, runbooks for repeatable procedures and hooks that enforce checks mechanically. That layer between you and the executor is the control plane.
 
-## The Pattern in One Paragraph
+## System Pattern
 
-Claude Code is stateless — every session forgets the last one. The fix is infrastructure,
-not memory: a **global CLAUDE.md** encodes how you want Claude to behave everywhere
-(policy), a per-project **PROJECT_CONTEXT.md** records where each project actually is
-(state), a per-project **CLAUDE.md** records how to work in that repo (local policy),
-**slash commands** capture repeatable procedures like deploys and context updates
-(runbooks), and **hooks** enforce checks automatically (validation). All of it lives in
-one private git repo — `project-context/` — beside your project directories, so it's
-versioned, backed up, and portable to a new machine.
+- A **global CLAUDE.md** encodes how you want Claude to behave everywhere
+(policy)
+- A per-project **PROJECT_CONTEXT.md** records where each project actually is
+(state)
+- A per-project **CLAUDE.md** records how to work in that repo (local policy),
+- **slash commands** capture repeatable procedures like deploys and context updates
+(runbooks)
+- **hooks** enforce checks automatically (validation). 
+
+All of it lives in one private git repo — `project-context/` — beside your project directories, so it's
+versioned, backed up and portable.
 
 ## Directory Layout You're Building
 
 ```
 ~/Projects/
-├── project-context/          # Private repo — the control plane (this kit becomes it)
+├── project-context/          # Private repo — the control plane
 │   ├── global-claude.md      # Master copy of your global policy
 │   ├── manifest.md           # Index of all projects
 │   ├── <project>/            # One shard per project:
@@ -43,11 +43,15 @@ versioned, backed up, and portable to a new machine.
 │   │   └── specs/            #   planning docs (optional)
 │   ├── commands/             # Slash commands (symlinked into projects)
 │   └── hooks/                # Hook scripts + settings profiles
-├── my-first-project/         # Your actual code repos, beside it
+├── my-first-project/         # Your actual code repos
 └── another-project/
 ```
 
 ## Setup
+
+0. Install Claude Code and download these files, put them where Claude Code can read them. Ask Claude to read the content and set everything up for you.
+
+Or...
 
 1. **Create your private context repo.** Copy this kit's contents into
    `~/Projects/project-context/`, `git init`, create a **private** GitHub repo, push.
@@ -73,6 +77,8 @@ versioned, backed up, and portable to a new machine.
 5. **Close every work session** with `/update-context`. This is the habit that makes the
    whole system work: the context files only stay useful if they're updated when reality
    changes. State drift is the failure mode.
+
+   **NOTE:** I define a 'session' as a single task/issue/job to be done. Despite the large context windows and increasingly clever models, 'updating context' and starting a new session per job to be done helps keeps the project context accurate and subsequent sessions spend less tokens reading mountains of code to get orientated with the project state.
 
 ## The Public-Repo Trick
 
@@ -106,5 +112,5 @@ repos you can commit CLAUDE.md directly or still use the symlink for consistency
 | `commands/update-context.md` | `/update-context` — end-of-session state sync |
 | `hooks/` | Example PostToolUse typecheck hook (TypeScript) + settings profile |
 
-Everything is a starting point. Delete what doesn't fit; the architecture matters, the
-specific rules are yours.
+Everything is a starting point. Delete what doesn't fit and adjust as needed. 
+Have a lot of fun :)
