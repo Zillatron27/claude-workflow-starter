@@ -19,7 +19,7 @@ These are infrastructure problems that can be helped (but not entirely solved) w
 ## System Pattern
 
 - A **global CLAUDE.md** encodes how you want Claude to behave everywhere
-(policy)
+(global policy)
 - A per-project **PROJECT_CONTEXT.md** records where each project actually is
 (state)
 - A per-project **CLAUDE.md** records how to work in that repo (local policy),
