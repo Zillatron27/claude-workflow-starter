@@ -92,11 +92,11 @@ repos you can commit CLAUDE.md directly or still use the symlink for consistency
 
 - **Context files track current state, not history.** Git log is the changelog. If a
   section describes what happened rather than what is, delete it.
-- **Encode lessons as policy.** When Claude makes a mistake you had to correct, add a
-  rule to the relevant CLAUDE.md so it never recurs. One correction, permanent fix.
-- **Specs before implementation.** Plan in whatever tool you think best in (Claude web,
-  a whiteboard, a doc), land the result as a spec in the project's shard, then point
-  Claude Code at the spec. "Implement the spec" beats re-explaining every session.
+- **Encode lessons as policy.** When Claude makes a mistake you had to correct, have it add a
+  rule to the relevant CLAUDE.md so it helps reduce reoccurrence.
+- **Specs before implementation.** Plan in whatever tool you think best in (Claude web, ChatGBT
+  a whiteboard, whatever), land the result as a spec in the project's context directoy, then point
+  Claude Code at the spec. "Implement the spec" beats re-explaining every detail at the start of a session.
 - **Surgical updates only.** `/update-context` touches only sections the session
   changed. Rewriting whole files churns git history and invites drift.
 
